@@ -33,11 +33,11 @@ public:
 class CoroutineAPI {
 public:
     coroutine_t create(coro_func func);
-    coro_packet resume(coroutine_t coro, coro_packet p) {coro.resume(p);}
+    coro_packet resume(coroutine_t coro, coro_packet p = {}) {coro.resume(p);}
     coroutine_t * running();
     int status(coroutine_t coro) {return coro.status;}
     coroutine_t wrap(coro_func func) {return create(func);}
-    coro_packet yield(coro_packet p);
+    coro_packet yield(coro_packet p = {});
 };
 
 extern CoroutineAPI coroutine;

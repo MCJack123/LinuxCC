@@ -14,12 +14,12 @@ void coro_function(boost::coroutines::asymmetric_coroutine<coro_packet*>::pull_t
 }
 //*/
 
-coroutine_t * current_coro;
+coroutine_t * current_coro = NULL;
 
 bool operator==(coro_packet lhs, coro_packet rhs) {return lhs.types == rhs.types && lhs.values == rhs.values;}
 
 coro_packet coroutine_t::resume(coro_packet p) {
-    if (this->status == COROUTINE_STATUS_DEAD) return;
+    if (this->status == COROUTINE_STATUS_DEAD) return p;
     coroutine_t * last_coro = current_coro;
     this->status = COROUTINE_STATUS_RUNNING;
     last_coro->status = COROUTINE_STATUS_NORMAL;
@@ -56,6 +56,9 @@ coroutine_t CoroutineAPI::create(coro_func func) {
 
 coroutine_t * CoroutineAPI::running() {return current_coro;}
 
-coro_packet CoroutineAPI::yield(coro_packet p) {current_coro->yield(p);}
+coro_packet CoroutineAPI::yield(coro_packet p) {
+    if (current_coro == NULL) return p;
+    current_coro->yield(p);
+}
 
 CoroutineAPI coroutine;
