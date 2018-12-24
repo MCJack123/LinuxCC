@@ -1,3 +1,7 @@
+#ifndef COLORSAPI_HPP
+#define COLORSAPI_HPP
+#include <map>
+
 class ColorsAPI {
 public:
     static const int white = 0x1;
@@ -16,6 +20,7 @@ public:
     static const int green = 0x2000;
     static const int red = 0x4000;
     static const int black = 0x8000;
+    static std::map<int, int> ansiMap;
 
     int combine(int color1, int color2) {return color1 | color2;}
     int subtract(int colors, int color) {return colors & (!color);}
@@ -30,3 +35,5 @@ public:
 
 extern ColorsAPI colors;
 extern ColoursAPI colours;
+
+#endif

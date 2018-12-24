@@ -2,9 +2,9 @@
 
 MathAPI math;
 
-struct frexp_val MathAPI::frexp(double x) {
-    struct frexp_val retval;
-    retval.m = ::frexp(x, &retval.e);
+std::pair<double, int> MathAPI::frexp(double x) {
+    std::pair<double, int> retval;
+    retval.first = ::frexp(x, &retval.second);
     return retval;
 }
 
@@ -22,9 +22,9 @@ T MathAPI::min(T first, Args... args) {
     else return m;
 }
 
-struct modf_val MathAPI::modf(double x) {
-    struct modf_val retval;
-    retval.i = floor(x);
-    retval.f = x - retval.i;
+std::pair<int, double> MathAPI::modf(double x) {
+    std::pair<int, double> retval;
+    retval.first = floor(x);
+    retval.second = x - retval.first;
     return retval;
 }

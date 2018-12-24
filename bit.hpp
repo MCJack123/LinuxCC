@@ -1,3 +1,6 @@
+#ifndef BITAPI_HPP
+#define BITAPI_HPP
+
 class BitAPI {
 public:
     int blshift(int n, int bits) {return n << bits;}
@@ -10,3 +13,5 @@ public:
 };
 
 extern BitAPI bit;
+
+#endif

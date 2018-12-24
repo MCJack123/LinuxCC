@@ -1,3 +1,5 @@
+#ifndef SETTINGSAPI_HPP
+#define SETTINGSAPI_HPP
 #include <string>
 #include <vector>
 #include <jsoncpp/json/json.h>
@@ -19,3 +21,5 @@ public:
 };
 
 extern SettingsAPI settings;
+
+#endif

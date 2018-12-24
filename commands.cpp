@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include "commands.hpp"
+#include "os.hpp"
 
 int CommandsAPI::exec(string command) {
     char *const argv[2] = {"-c", (char *const)command.c_str()};
@@ -11,7 +12,7 @@ int CommandsAPI::execAsync(string command) {
     if (PID == 0) {
         char *const argv[2] = {"-c", (char *const)command.c_str()};
         int retval = execv("/bin/bash", argv);
-        // do something with the return value
+        os.queueEvent(event_t("task_complete").setInt(0, getpid()).setInt(1, retval));
     } else return PID;
 }
 

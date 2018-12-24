@@ -1,3 +1,5 @@
+#ifndef COROUTINEAPI_HPP
+#define COROUTINEAPI_HPP
 #include <boost/coroutine/all.hpp>
 #include <vector>
 #include <typeinfo>
@@ -41,3 +43,5 @@ public:
 };
 
 extern CoroutineAPI coroutine;
+
+#endif

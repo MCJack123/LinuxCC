@@ -1,3 +1,5 @@
+#ifndef IOAPI_HPP
+#define IOAPI_HPP
 #include <string>
 #include <vector>
 #include <stdio.h>
@@ -51,3 +53,5 @@ public:
 };
 
 extern IOAPI io;
+
+#endif

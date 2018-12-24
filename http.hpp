@@ -1,3 +1,5 @@
+#ifndef HTTPAPI_HPP
+#define HTTPAPI_HPP
 #include <string>
 #include <map>
 #include <sstream>
@@ -31,3 +33,5 @@ public:
 };
 
 extern HTTPAPI http;
+
+#endif

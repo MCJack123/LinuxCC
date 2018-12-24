@@ -1,4 +1,5 @@
 #include "http.hpp"
+#include "os.hpp"
 #include <unistd.h>
 
 HTTPAPI http;
@@ -47,16 +48,19 @@ HTTPAPI::HTTPAPI() {curl_global_init(CURL_GLOBAL_SSL);}
 void HTTPAPI::request(string url, string postData, std::map<string, string> headers) {
     pid_t PID = fork();
     if (PID != 0) return;
-    CURL * handle = curl_easy_init();
-    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_data_null);
-    if (postData != "") curl_easy_setopt(handle, CURLOPT_POSTFIELDS, postData.c_str());
+    HTTPHandle h;
+    h.handle = curl_easy_init();
+    curl_easy_setopt(h.handle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(h.handle, CURLOPT_WRITEDATA, &h.data);
+    if (postData != "") curl_easy_setopt(h.handle, CURLOPT_POSTFIELDS, postData.c_str());
     struct curl_slist *header_list = NULL;
     if (headers.size() > 0) {
         for (std::map<string, string>::iterator it = headers.begin(); it != headers.end(); it++)
             header_list = curl_slist_append(header_list, (it->first + ": " + it->second).c_str());
-        curl_easy_setopt(handle, CURLOPT_HTTPHEADER, header_list);
+        curl_easy_setopt(h.handle, CURLOPT_HTTPHEADER, header_list);
     }
-    curl_easy_perform(handle);
+    if (curl_easy_perform(h.handle) == CURLE_OK) os.queueEvent(event_t("http_success").setString(0, url).setString(1, h.readAll()));
+    else os.queueEvent(event_t("http_failure").setString(0, url));
     if (headers.size() > 0) curl_slist_free_all(header_list);
 }
 

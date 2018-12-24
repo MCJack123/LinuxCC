@@ -1,14 +1,7 @@
+#ifndef MATHAPI_HPP
+#define MATHAPI_HPP
 #include <math.h>
-
-struct frexp_val {
-    double m;
-    int e;
-};
-
-struct modf_val {
-    int i;
-    double f;
-};
+#include <utility>
 
 class MathAPI {
 public:
@@ -24,7 +17,7 @@ public:
     double exp(double x) {return ::exp(x);}
     int floor(double x) {return (int)::floor(x);}
     double fmod(double x, double y) {return ::fmod(x, y);}
-    struct frexp_val frexp(double x);
+    std::pair<double, int> frexp(double x); // m, e
     double huge = __DBL_MAX__;
     double ldexp(double m, int e) {return ::ldexp(m, e);}
     double log(double x) {return ::log(x);}
@@ -37,7 +30,7 @@ public:
     T min(T first, Args... args);
     template<typename T>
     T min(T first) {return first;}
-    struct modf_val modf(double x);
+    std::pair<int, double> modf(double x); // i, f
     double pi = M_PI;
     double pow(double x, double y) {return ::pow(x, y);}
     double rad(double x) {return x * (M_PI / 180.0);}
@@ -53,3 +46,5 @@ public:
 };
 
 extern MathAPI math;
+
+#endif

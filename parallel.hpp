@@ -1,3 +1,5 @@
+#ifndef PARALLELAPI_HPP
+#define PARALLELAPI_HPP
 #include "coroutine.hpp"
 
 class ParallelAPI {
@@ -9,3 +11,5 @@ public:
 };
 
 extern ParallelAPI parallel;
+
+#endif

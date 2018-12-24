@@ -1,3 +1,5 @@
+#ifndef FSAPI_HPP
+#define FSAPI_HPP
 #include <string>
 #include <vector>
 #include <cstdio>
@@ -43,3 +45,5 @@ public:
 };
 
 extern FSAPI fs;
+
+#endif

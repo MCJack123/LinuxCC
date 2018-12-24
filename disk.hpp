@@ -1,3 +1,5 @@
+#ifndef DISKAPI_HPP
+#define DISKAPI_HPP
 #include <string>
 
 using std::string;
@@ -15,3 +17,5 @@ public:
 };
 
 extern DiskAPI disk;
+
+#endif

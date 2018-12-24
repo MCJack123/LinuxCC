@@ -1,3 +1,5 @@
+#ifndef COMMANDSAPI_HPP
+#define COMMANDSAPI_HPP
 #include <string>
 
 using std::string;
@@ -10,3 +12,5 @@ public:
 };
 
 extern CommandsAPI commands;
+
+#endif

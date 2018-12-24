@@ -1,3 +1,5 @@
+#ifndef HELPAPI_HPP
+#define HELPAPI_HPP
 #include <string>
 #include <vector>
 
@@ -14,3 +16,5 @@ public:
 };
 
 extern HelpAPI help;
+
+#endif
